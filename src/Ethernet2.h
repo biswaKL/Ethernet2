@@ -40,7 +40,7 @@ public:
   // Default IP, Gateway and subnet address are also writen.
   // so, It needs some initial time. please refer WIZ550io Datasheet in details.
   // 30 sencond timeout for DHCP request
-  int begin(unsigned long timeout=30);
+  int begin(unsigned long timeout=30 * 1000);
   void begin(IPAddress local_ip);
   void begin(IPAddress local_ip, IPAddress dns_server);
   void begin(IPAddress local_ip, IPAddress dns_server, IPAddress gateway);
@@ -50,7 +50,7 @@ public:
   // configuration through DHCP.
   // Returns 0 if the DHCP configuration failed, and 1 if it succeeded
   // 30 sencond timeout for DHCP request
-  int begin(uint8_t *mac_address, unsigned long timeout=30);
+  int begin(uint8_t *mac_address, unsigned long timeout=30 * 1000);
   void begin(uint8_t *mac_address, IPAddress local_ip);
   void begin(uint8_t *mac_address, IPAddress local_ip, IPAddress dns_server);
   void begin(uint8_t *mac_address, IPAddress local_ip, IPAddress dns_server, IPAddress gateway);
