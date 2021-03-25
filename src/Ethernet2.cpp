@@ -18,7 +18,7 @@ uint16_t EthernetClass::_server_port[MAX_SOCK_NUM] = { 0, };
 
 
 #if defined(WIZ550io_WITH_MACADDRESS)
-int EthernetClass::begin(void)
+int EthernetClass::begin(unsigned long timeout)
 {
   byte mac_address[6] ={0,};
   if (_dhcp != NULL) {
@@ -32,7 +32,7 @@ int EthernetClass::begin(void)
   w5500.getMACAddress(mac_address);
   
   // Now try to get our config info from a DHCP server
-  int ret = _dhcp->beginWithDHCP(mac_address);
+  int ret = _dhcp->beginWithDHCP(mac_address, timeout);
   if(ret == 1)
   {
     // We've successfully found a DHCP server and got our configuration info, so set things
@@ -81,7 +81,7 @@ void EthernetClass::begin(IPAddress local_ip, IPAddress dns_server, IPAddress ga
   _dnsServerAddress = dns_server;
 }
 #else
-int EthernetClass::begin(uint8_t *mac_address)
+int EthernetClass::begin(uint8_t *mac_address, unsigned long timeout)
 {
    if (_dhcp != NULL) {
      delete _dhcp;
@@ -93,7 +93,7 @@ int EthernetClass::begin(uint8_t *mac_address)
   w5500.setIPAddress(IPAddress(0,0,0,0).raw_address());
 
   // Now try to get our config info from a DHCP server
-  int ret = _dhcp->beginWithDHCP(mac_address);
+  int ret = _dhcp->beginWithDHCP(mac_address, timeout);
   if(ret == 1)
   {
     // We've successfully found a DHCP server and got our configuration info, so set things
