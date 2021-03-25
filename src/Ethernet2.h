@@ -39,7 +39,8 @@ public:
   // WIZ550io has a MAC address which is written after reset.
   // Default IP, Gateway and subnet address are also writen.
   // so, It needs some initial time. please refer WIZ550io Datasheet in details.
-  int begin(void);
+  // 30 sencond timeout for DHCP request
+  int begin(unsigned long timeout=30);
   void begin(IPAddress local_ip);
   void begin(IPAddress local_ip, IPAddress dns_server);
   void begin(IPAddress local_ip, IPAddress dns_server, IPAddress gateway);
@@ -48,7 +49,8 @@ public:
   // Initialize the Ethernet shield to use the provided MAC address and gain the rest of the
   // configuration through DHCP.
   // Returns 0 if the DHCP configuration failed, and 1 if it succeeded
-  int begin(uint8_t *mac_address);
+  // 30 sencond timeout for DHCP request
+  int begin(uint8_t *mac_address, unsigned long timeout=30);
   void begin(uint8_t *mac_address, IPAddress local_ip);
   void begin(uint8_t *mac_address, IPAddress local_ip, IPAddress dns_server);
   void begin(uint8_t *mac_address, IPAddress local_ip, IPAddress dns_server, IPAddress gateway);
